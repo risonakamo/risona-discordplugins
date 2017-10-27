@@ -2,6 +2,8 @@
 
 var toggleChannel=function(){};
 
+var attached=0;
+
 toggleChannel.prototype.start=function()
 {
 
@@ -9,11 +11,10 @@ toggleChannel.prototype.start=function()
 
 toggleChannel.prototype.load=function()
 {
-    var this1=this;
-    this1.hookButton();
-
-    $(".guild").on("click",function(e){
-        this1.hookButton();
+    $(".channels-wrap").addClass("channels-wrap-hide")
+    var tthis=this;
+    $(".guild").on("click",function(){
+        setTimeout(function(){tthis.insertButton()},300);
     });
 };
 
@@ -24,7 +25,7 @@ toggleChannel.prototype.unload=function()
 
 toggleChannel.prototype.stop=function()
 {
-
+    
 };
 
 toggleChannel.prototype.onMessage=function()
@@ -34,7 +35,7 @@ toggleChannel.prototype.onMessage=function()
 
 toggleChannel.prototype.onSwitch=function()
 {
-    // this.hookButton();
+    this.insertButton();
 };
 
 toggleChannel.prototype.observer=function (e)
@@ -59,7 +60,7 @@ toggleChannel.prototype.getDescription=function()
 
 toggleChannel.prototype.getVersion=function()
 {
-    return "2.1";
+    return "1";
 };
 
 toggleChannel.prototype.getAuthor=function()
@@ -67,21 +68,26 @@ toggleChannel.prototype.getAuthor=function()
     return "rishona";
 };
 
-toggleChannel.prototype.hookButton=function()
+toggleChannel.prototype.insertButton=function()
 {
-    var hookButton=$(".icon-mr9wAc");
-
-    if (hookButton.length!=5)
+    if ($(".title-wrap").length==0)
     {
-        setTimeout(this.hookButton,100);
+        attached=0;
         return;
     }
 
-    hookButton=hookButton.eq(2);
+    if (attached==1)
+    {
+        return;
+    }
+    
+    attached=1;
+    var hookButton=$(".header-toolbar button:nth-of-type(3)");
 
     hookButton.off("contextmenu");
     hookButton.on("contextmenu",function(e){
-        $(".channels-3g2vYe").toggleClass("channels-wrap-hide");
+        console.log("aa");
+        $(".channels-wrap").toggleClass("channels-wrap-hide")
     });
-
+    
 };

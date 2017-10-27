@@ -10,11 +10,9 @@ toggleChannel.prototype.start=function()
 toggleChannel.prototype.load=function()
 {
     var this1=this;
-    this1.hookButton();
-
     $(".guild").on("click",function(e){
         this1.hookButton();
-    });
+    });    
 };
 
 toggleChannel.prototype.unload=function()
@@ -24,7 +22,7 @@ toggleChannel.prototype.unload=function()
 
 toggleChannel.prototype.stop=function()
 {
-
+    
 };
 
 toggleChannel.prototype.onMessage=function()
@@ -59,7 +57,7 @@ toggleChannel.prototype.getDescription=function()
 
 toggleChannel.prototype.getVersion=function()
 {
-    return "2.1";
+    return "2";
 };
 
 toggleChannel.prototype.getAuthor=function()
@@ -69,19 +67,12 @@ toggleChannel.prototype.getAuthor=function()
 
 toggleChannel.prototype.hookButton=function()
 {
-    var hookButton=$(".icon-mr9wAc");
-
-    if (hookButton.length!=5)
-    {
-        setTimeout(this.hookButton,100);
-        return;
-    }
-
-    hookButton=hookButton.eq(2);
+    var hookButton=$(".header-toolbar button").eq(2);
 
     hookButton.off("contextmenu");
     hookButton.on("contextmenu",function(e){
-        $(".channels-3g2vYe").toggleClass("channels-wrap-hide");
+        console.log("aa");
+        $(".channels-wrap").toggleClass("channels-wrap-hide");
     });
-
+    
 };
